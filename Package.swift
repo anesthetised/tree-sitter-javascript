@@ -3,10 +3,9 @@
 import Foundation
 import PackageDescription
 
-var sources = ["src/parser.c"]
-if FileManager.default.fileExists(atPath: "src/scanner.c") {
-    sources.append("src/scanner.c")
-}
+// Always build the external scanner: a relative fileExists check fails when SwiftPM evaluates the
+// manifest from another working directory.
+let sources = ["src/parser.c", "src/scanner.c"]
 
 let package = Package(
     name: "TreeSitterJavaScript",
